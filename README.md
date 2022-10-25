@@ -13,7 +13,7 @@ Repo houses components of a microservice which provides ingredient definitions t
 - Currently, the server.py file and client.js file are configured to run on 6000, locally. Client.js is configured to send the request to 'http://127.0.0.1:6000/' via its function _ingredient_request()_.
 - The ingredient in question can be passed to _ingredient_request()_ as a string, the function will create a JSON object itself.
 
-### Example Call 
+### Example Call (Modified Snippet from Client.js)
 
 	sendrequest = request(options = {
 		method: 'GET',
@@ -26,6 +26,12 @@ Repo houses components of a microservice which provides ingredient definitions t
 
 - The data corresponding to the ingredient in question is sent back to client.js via an HTTP response (again, on port 6000 in current configuration - 'http://127.0.0.1:6000/').
 - HTTP response contains a JSON object in the form of {"item": item, "definition": definition, "url": url}.
+
+### Handling of Response (Modified Snippet from Client.js)
+function(parsedBody) {
+			result = parsedBody;
+			return result;
+		})
 
 ### Example Response
 {
