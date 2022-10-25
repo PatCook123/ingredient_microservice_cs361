@@ -19,7 +19,6 @@ async function ingredient_request(ingredient) {
 		// Return result to console
 		.then(function (parsedBody) {
 			result = parsedBody;
-			console.log(result)
 			return result;
 		})
 		.catch(function (err) {
