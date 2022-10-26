@@ -13,7 +13,7 @@ link = "https://whatscookingamerica.net/glossary/"
 def get_definition(item):
     # Create a browser object
     b = mechanicalsoup.StatefulBrowser()
-    b.set_user_agent('recipe-service')
+    b.set_user_agent('soup')
     # Retrieve HTML document
     data_page = b.get(link).soup
     # Locate the strong element within the HTML document that contains

@@ -19,6 +19,7 @@ async function ingredient_request(ingredient) {
 		// Return result to console
 		.then(function (parsedBody) {
 			result = parsedBody;
+			console.log(result)
 			return result;
 		})
 		.catch(function (err) {
@@ -27,4 +28,4 @@ async function ingredient_request(ingredient) {
 }
 
 // Sample call of function
-ingredient_request('boudin noir');
+ingredient_request('STRAW');
