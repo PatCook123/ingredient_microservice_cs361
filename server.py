@@ -7,12 +7,13 @@ a definition for.
 from flask import Flask, request
 import json
 from scraper import get_definition
+from werkzeug.exceptions import HTTPException
 
 # flask server
 app = Flask(__name__)
 
 # URL route
-@app.route('/', methods = ['GET'])
+@app.route('/ingredientinfo', methods = ['GET'])
 def ingredient_info():
     # Get string required for scraper
     data = request.get_json()
@@ -27,7 +28,13 @@ def ingredient_info():
     # Return json containing formatted item name and definition of item
     return json.dumps({"item": item,
                        "definition": definition,
-                       "url": url})
+                       "url": url}), 200
+
+# 500 Error exception handling
+@app.errorhandler(500)
+def handle_exception(e):
+    return {"Error": "500 Error"}, 500
+
 
 # Running on port 6000
 if __name__ == "__main__":
