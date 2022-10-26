@@ -12,8 +12,9 @@ from werkzeug.exceptions import HTTPException
 # flask server
 app = Flask(__name__)
 
+
 # URL route
-@app.route('/ingredientinfo', methods = ['GET'])
+@app.route('/ingredientinfo', methods=['GET'])
 def ingredient_info():
     # Get string required for scraper
     data = request.get_json()
@@ -22,18 +23,22 @@ def ingredient_info():
     # definition from web
     scrape = get_definition(item)
     if scrape is None:
-        return json.dumps({"item": item,
-                           "definition": "Item not found."})
+        return json.dumps({"item": item, "definition": "Item not found."})
     item, definition, url = str(scrape[0]), str(scrape[1]), str(scrape[2])
     # Return json containing formatted item name and definition of item
-    return json.dumps({"item": item,
-                       "definition": definition,
-                       "url": url}), 200
+    return json.dumps(
+        {"item": item, "definition": definition, "url": url}), 200
+
 
 # 500 Error exception handling
 @app.errorhandler(500)
 def handle_exception(e):
-    return {"Error": "500 Error"}, 500
+    return {"500 Error": "Internal Service Error"}, 500
+
+# 400 Error exception handling
+@app.errorhandler(400)
+def handle_exception(e):
+    return {"400 Error": "Bad Request"}, 400
 
 
 # Running on port 6000
